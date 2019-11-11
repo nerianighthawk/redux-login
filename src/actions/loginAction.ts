@@ -28,8 +28,9 @@ export const updatePassword = (v: string) => (
 export const submit = () => (
     async (dispatch: Dispatch<Action<{} | { params: {} } & { error: {} }>>) => {
         login()
-            .then(res => {
-                setLocal(SESSIONID, res.token).then(() => { dispatch(push(CLIENT_URI)) })
+            .then(async res => {
+                await setLocal(SESSIONID, res.token)
+                dispatch(push(CLIENT_URI))
             })
             .catch(() => { })
     }
